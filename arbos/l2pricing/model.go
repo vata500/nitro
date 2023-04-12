@@ -15,7 +15,7 @@ const InitialPerBlockGasLimitV0 uint64 = 20 * 1000000
 const InitialSpeedLimitPerSecondV6 = 7000000
 const InitialPerBlockGasLimitV6 uint64 = 32 * 1000000
 const InitialMinimumBaseFeeWei = params.GWei / 10
-const InitialBaseFeeWei = InitialMinimumBaseFeeWei
+const InitialBaseFeeWei = InitialMinimumBaseFeeWei * 0
 const InitialGasPoolSeconds = 10 * 60
 const InitialRateEstimateInertia = 60
 const InitialPricingInertia = 102
@@ -43,10 +43,11 @@ func (ps *L2PricingState) UpdatePricingModel(l2BaseFee *big.Int, timePassed uint
 	backlog, _ := ps.GasBacklog()
 	minBaseFee, _ := ps.MinBaseFeeWei()
 	baseFee := minBaseFee
+	println(baseFee)
 	if backlog > tolerance*speedLimit {
 		excess := int64(backlog - tolerance*speedLimit)
 		exponentBips := arbmath.NaturalToBips(excess) / arbmath.Bips(inertia*speedLimit)
 		baseFee = arbmath.BigMulByBips(minBaseFee, arbmath.ApproxExpBasisPoints(exponentBips))
 	}
-	_ = ps.SetBaseFeeWei(baseFee)
+	_ = ps.SetBaseFeeWei(big.NewInt(0))
 }

@@ -60,7 +60,8 @@ func (ps *L2PricingState) BaseFeeWei() (*big.Int, error) {
 }
 
 func (ps *L2PricingState) SetBaseFeeWei(val *big.Int) error {
-	return ps.baseFeeWei.SetSaturatingWithWarning(val, "L2 base fee")
+	println(val)
+	return ps.baseFeeWei.SetSaturatingWithWarning(big.NewInt(0), "L2 base fee")
 }
 
 func (ps *L2PricingState) MinBaseFeeWei() (*big.Int, error) {
@@ -71,7 +72,8 @@ func (ps *L2PricingState) SetMinBaseFeeWei(val *big.Int) error {
 	// This modifies the "minimum basefee" parameter, but doesn't modify the current basefee.
 	// If this increases the minimum basefee, then the basefee might be below the minimum for a little while.
 	// If so, the basefee will increase by up to a factor of two per block, until it reaches the minimum.
-	return ps.minBaseFeeWei.SetChecked(val)
+	println(val)
+	return ps.minBaseFeeWei.SetChecked(big.NewInt(0))
 }
 
 func (ps *L2PricingState) SpeedLimitPerSecond() (uint64, error) {

@@ -27,7 +27,7 @@ services:
         DATABASE_URL: postgresql://postgres:@postgres:5432/blockscout
         ECTO_USE_SSL: "false"
     ports:
-      - "127.0.0.1:4000:4000"
+      - "7777:4000"
 
   postgres:
     image: postgres:13.6
@@ -153,9 +153,9 @@ services:
     pid: host # allow debugging
     image: nitro-node-dev-testnode
     ports:
-      - "127.0.0.1:8547:8547"
-      - "127.0.0.1:8548:8548"
-      - "127.0.0.1:9642:9642"
+      - "8547:8547"
+      - "8548:8548"
+      - "9642:9642"
     volumes:
       - "seqdata:/home/user/.arbitrum/local/nitro"
       - "config:/config"
